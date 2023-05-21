@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мови та студенти</title>
+    <style>
+        .yellow-block {
+            background-color: yellow;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" onclick="loadLanguages()">Мови</a>
+    <a href="#" onclick="loadStudents()">Студенти</a>
+    <div class="yellow-block" id="content"></div>
+
+    <script>
+        function loadLanguages() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var languages = JSON.parse(xhr.responseText);
+                    var contentDiv = document.getElementById("content");
+                    contentDiv.innerHTML = "<h2>Мови програмування</h2>" + languages.join(", ");
+                }
+            };
+            xhr.open("GET", "1.txt", true);
+            xhr.send();
+        }
+
+        function loadStudents() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var students = JSON.parse(xhr.responseText);
+                    var contentDiv = document.getElementById("content");
+                    contentDiv.innerHTML = "<h2>Список студентів</h2>" + students.join(", ");
+                }
+            };
+            xhr.open("GET", "2.txt", true);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
